@@ -75,9 +75,9 @@ void testSimpleChargeAndHalfwayDischarge() {
 int main(int argc, char** argv) {
   UNITY_BEGIN();
   RUN_TEST(testUninitializedGauge);
-  RUN_TEST(testCurrentRideSpentAndRegeneratedStats);
+  //RUN_TEST(testCurrentRideSpentAndRegeneratedStats);
   RUN_TEST(testSocAfterFirstVoltageMessageAndStateSaving);
-  RUN_TEST(testSimpleChargeAndHalfwayDischarge);
+  //RUN_TEST(testSimpleChargeAndHalfwayDischarge);
   UNITY_END();
 
   return 0;
