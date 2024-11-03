@@ -128,6 +128,9 @@ DynamicJsonDocument generateMetadataJson() {
 
   // add current read out BMS Serial Nr.  
   root["bms_serial_captured"] = relay->getCapturedBMSSerial();
+
+  // add current read out BMS Battery type
+  root["bms_battery_type_captured"] = relay->getCapturedBMSBatteryType();
   
   return metadata;
 }
@@ -147,11 +150,6 @@ DynamicJsonDocument generateOwieStatusJson() {
   JsonObject bms_percentage = root.createNestedObject("bms_percentage");
   bms_percentage["value"] = String(relay->getBmsReportedSOC());
   bms_percentage["unit"] = "%";
-
-  // bms_battery_type
-  JsonObject bms_battery_type = root.createNestedObject("bms_battery_type");
-  bms_battery_type["value"] = String(relay->getBmsReportedBatteryType());
-  bms_battery_type["unit"] = "";
 
   // uptime
   JsonObject uptime = root.createNestedObject("uptime");

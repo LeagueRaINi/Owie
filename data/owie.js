@@ -17,6 +17,26 @@ const TEMPERATURE_SERVERITY_OFFSETS = {
   "55": "error"
 }
 
+// bms battery types
+const BATTERY_TYPES = {
+  0x0: 'Undefined',
+  0x1: 'A123 LiFePO4',
+  0x2: 'VTC6',
+  0x3: 'HG2',
+  0x4: '30Q',
+  0x5: 'VTC5A',
+  0x6: 'VTC5D',
+  0x7: '30Q6',
+  0x8: 'P28A',
+  0x9: 'VTC6A',
+  0xA: 'P42A',
+  0xB: '40T3'
+};
+
+const getBatteryTypeName = (code) => {
+  return BATTERY_TYPES[code] || 'Unknown';
+};
+
 /**
  * Router Object.
  * Handles URL routing
@@ -570,6 +590,8 @@ let handleMetadata = async () => {
      // add captured BMS serial number (information only)
      document.querySelector(".bms-serial-meta").innerHTML = `${meta.bms_serial_captured}`;
 
+     // add captured BMS battery type
+     document.querySelector(".bms-battery-type-meta").innerHTML = `${getBatteryTypeName(meta.bms_battery_type_captured)}`;
   } catch (e) {
     handleError(e);
   }
@@ -614,9 +636,6 @@ let getAutoupdate = async () => {
     document.getElementsByClassName("current-text")[0].getElementsByClassName("value-text")[0].innerText =jsonData.current.value;
 
     document.getElementsByClassName("voltage-text")[0].getElementsByClassName("value-text")[0].innerText = jsonData.voltage.value;
-
-    // insert battery_type here!
-    document.getElementsByClassName("battery-type-text")[0].getElementsByClassName("value-text")[0].innerText = jsonData.bms_battery_type.value;
 
     let nCells = 0;
     for (let c of document.getElementsByClassName("battery-voltage-text")) {

@@ -73,7 +73,7 @@ class BmsRelay {
   /**
    * @brief Battery type reported by the BMS.
    */
-  int8_t getBmsReportedBatteryType() { return bms_battery_type_; }
+  int8_t getCapturedBMSBatteryType() { return bms_battery_type_; }
 
   /**
    * @brief If set to non-zero value, spoofs the captured BMS battery type
