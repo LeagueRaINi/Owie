@@ -123,15 +123,15 @@ DynamicJsonDocument generateMetadataJson() {
   root["ssid"] = Settings->ap_name;
   root["pass"] = "";
 
-  // package stats in monitoring section
-  root["package_stats"] = generatePackageStatsJson();
-
   // add current read out BMS Serial Nr.  
   root["bms_serial_captured"] = relay->getCapturedBMSSerial();
 
   // add current read out BMS Battery type
   root["bms_battery_type_captured"] = relay->getCapturedBMSBatteryType();
-  
+
+  // package stats in monitoring section
+  root["package_stats"] = generatePackageStatsJson();
+
   return metadata;
 }
 
