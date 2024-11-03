@@ -419,6 +419,7 @@ void setupWebServer(BmsRelay *bmsRelay) {
 
       // board will need to be restarted
       Settings->bms_battery_type_override = overrideValue->value().toInt();
+      saveSettings();
       request->send(200, "text/html", "Battery type override set!");
       return;
     }
