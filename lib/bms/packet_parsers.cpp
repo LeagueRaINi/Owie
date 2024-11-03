@@ -110,3 +110,15 @@ void BmsRelay::bmsStatusParser(Packet& p) {
                      isBatteryTempOutOfRange() || isBatteryOvercharged());
   battery_fuel_gauge_.updateChargingStatus(isCharging());
 }
+
+void BmsRelay::batteryTypeParser(Packet& p) {
+  if (p.getType() != 8) {
+    return;
+  }
+
+  bms_battery_type_ = p.data()[0];
+
+  if (bms_battery_type_overwrite_ != 0) {
+    p.data()[0] = bms_battery_type_overwrite_;
+  }
+}

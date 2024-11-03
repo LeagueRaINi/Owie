@@ -148,6 +148,11 @@ DynamicJsonDocument generateOwieStatusJson() {
   bms_percentage["value"] = String(relay->getBmsReportedSOC());
   bms_percentage["unit"] = "%";
 
+  // bms_battery_type
+  JsonObject bms_battery_type = root.createNestedObject("bms_battery_type");
+  bms_battery_type["value"] = String(relay->getBmsReportedBatteryType());
+  bms_battery_type["unit"] = "";
+
   // uptime
   JsonObject uptime = root.createNestedObject("uptime");
   uptime["value"] = uptimeString();

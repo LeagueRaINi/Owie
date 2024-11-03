@@ -615,6 +615,9 @@ let getAutoupdate = async () => {
 
     document.getElementsByClassName("voltage-text")[0].getElementsByClassName("value-text")[0].innerText = jsonData.voltage.value;
 
+    // insert battery_type here!
+    document.getElementsByClassName("battery-type-text")[0].getElementsByClassName("value-text")[0].innerText = jsonData.bms_battery_type.value;
+
     let nCells = 0;
     for (let c of document.getElementsByClassName("battery-voltage-text")) {
       let cellVolt = jsonData.battery_cells.value[nCells];
