@@ -73,7 +73,13 @@ class BmsRelay {
   /**
    * @brief Battery type reported by the BMS.
    */
-  int8_t getCapturedBMSBatteryType() { return bms_battery_type_; }
+  uint8_t getCapturedBMSBatteryType() { return bms_battery_type_; }
+
+  /**
+   * @brief If set to non-zero value, spoofs the BMS battery type
+   * with the number provided here.
+   */
+  void setBMSBatteryTypeOverride(uint8_t type) { bms_battery_type_override_ = type; }
 
   /**
    * @brief Spoofed battery percentage sent to the controller.
@@ -143,6 +149,7 @@ class BmsRelay {
   uint16_t total_voltage_millivolts_ = 0;
 
   uint8_t bms_battery_type_ = 0;
+  uint8_t bms_battery_type_override_ = 0;
 
   int8_t temperatures_celsius_[5] = {0};
   int8_t avg_temperature_celsius_ = 0;

@@ -128,7 +128,7 @@ DynamicJsonDocument generateMetadataJson() {
 
   // add current read out BMS Battery type
   root["bms_battery_type_captured"] = relay->getCapturedBMSBatteryType();
-  root["bms_battery_type_override"] = Settings->battery_type_override;
+  root["bms_battery_type_override"] = Settings->bms_battery_type_override;
 
   // package stats in monitoring section
   root["package_stats"] = generatePackageStatsJson();
@@ -418,7 +418,7 @@ void setupWebServer(BmsRelay *bmsRelay) {
         }
 
       // board will need to be restarted
-      Settings->battery_type_override = overrideValue->value().toInt();
+      Settings->bms_battery_type_override = overrideValue->value().toInt();
       request->send(200, "text/html", "Battery type override set!");
       return;
     }

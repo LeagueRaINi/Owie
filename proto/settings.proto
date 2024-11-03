@@ -18,7 +18,7 @@ message SettingsMsg {
   bool is_locked = 9; // if the board is actively locked/parked
   bool locking_enabled = 10; // if the board locking functionality is enabled ('armed')
   BatteryStateMsg battery_state = 12;
-  uint8 battery_type_override = 0;
+  uint8 bms_battery_type_override = 0;
 
   reserved 5,11;
 }

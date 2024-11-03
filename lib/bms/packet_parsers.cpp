@@ -4,7 +4,6 @@
 
 #include "bms_relay.h"
 #include "packet.h"
-#include "settings.h"
 
 namespace {
 
@@ -119,7 +118,7 @@ void BmsRelay::batteryTypeParser(Packet& p) {
 
   bms_battery_type_ = p.data()[0];
 
-  if (Settings->battery_type_override > 0) {
+  if (bms_battery_type_override_ > 0) {
     p.data()[0] = bms_battery_type_override_;
   }
 }

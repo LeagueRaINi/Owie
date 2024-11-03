@@ -77,6 +77,10 @@ void bms_setup() {
     relay->getBatteryFuelGauge().restoreState(gaugeState);
   }
 
+  if (Settings->bms_battery_type_override > 0) {
+    relay->setBMSBatteryTypeOverride(Settings->bms_battery_type_override);
+  }
+
   // relay->setPowerOffCallback([]() {
   //   Settings->graceful_shutdown_count++;
   //   const FuelGaugeState &gaugeState = relay->getBatteryFuelGauge().getState();
