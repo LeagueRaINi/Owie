@@ -1,5 +1,5 @@
 name: Build and test everything
-on: [push, pull_request, workflow_call]
+on: [push, pull_request, workflow_call, workflow_dispatch]
 jobs:
   build_and_test:
     runs-on: ubuntu-latest
@@ -19,7 +19,7 @@ jobs:
           key: ${{ runner.os }}-${{ hashFiles('**/lockfiles') }}
       - name: Set up Python
         uses: actions/setup-python@v2
-      - name: Install PlatformIO and html-minifier-terser
+      - name: Install PlatformIO, minify and html-minifier-terser
         run: |
           python -m pip install --upgrade pip
           pip install --upgrade platformio
