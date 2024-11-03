@@ -79,7 +79,7 @@ class BmsRelay {
    * @brief If set to non-zero value, spoofs the captured BMS battery type
    * with the value provided here.
    */
-  int8_t setBmsReportedBatteryType(int8_t type) { bms_battery_type_overwrite_ = type; }
+  void setBmsReportedBatteryType(int8_t type) { bms_battery_type_overwrite_ = type; }
 
   /**
    * @brief Spoofed battery percentage sent to the controller.
