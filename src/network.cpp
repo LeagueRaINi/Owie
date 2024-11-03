@@ -73,7 +73,7 @@ DynamicJsonDocument generatePackageStatsJson() {
 }
 
 DynamicJsonDocument generateMetadataJson() {
-  DynamicJsonDocument metadata(1024);
+  DynamicJsonDocument metadata(2048);
   JsonObject root = metadata.to<JsonObject>();
 
   // owie version
