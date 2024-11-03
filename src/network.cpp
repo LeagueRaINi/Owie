@@ -197,15 +197,9 @@ DynamicJsonDocument generateOwieStatusJson() {
   }
   temperatures["unit"] = "&deg;C";
   
-  // add current read out BMS Serial Nr.
-  JsonObject bms_serial = root.createNestedObject("bms_serial_captured");
-  bms_serial["value"] = relay->getCapturedBMSSerial();
-  bms_serial["unit"] = "";
-  
   // add new battery status values (used only at stats page.)
   // normaly there would be a reset for the stats, but as the project is more or less abandoned from the maintainer...
   // (no effort is put into this any more...)
-  // add current read out BMS Serial Nr.
   JsonObject voltage_based_soc = root.createNestedObject("voltage_based_soc");
   voltage_based_soc["value"] = String(relay->getBatteryFuelGauge().getVoltageBasedSoc());
   voltage_based_soc["unit"] = "%";
@@ -233,7 +227,6 @@ DynamicJsonDocument generateOwieStatusJson() {
   current_milliamp_hours["unit"] = "mAh";
 
   return statusDoc;
-
 }
 }
 void setupWifi() {
