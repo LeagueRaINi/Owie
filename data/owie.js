@@ -19,18 +19,18 @@ const TEMPERATURE_SERVERITY_OFFSETS = {
 
 // bms battery types
 const BATTERY_TYPES = {
-  0x0: 'Undefined',
-  0x1: 'A123 LiFePO4',
-  0x2: 'VTC6',
-  0x3: 'HG2',
-  0x4: '30Q',
-  0x5: 'VTC5A',
-  0x6: 'VTC5D',
-  0x7: '30Q6',
-  0x8: 'P28A',
-  0x9: 'VTC6A',
-  0xA: 'P42A',
-  0xB: '40T3'
+  0: 'Undefined',
+  1: 'A123 LiFePO4',
+  2: 'VTC6',
+  3: 'HG2',
+  4: '30Q',
+  5: 'VTC5A',
+  6: 'VTC5D',
+  7: '30Q6',
+  8: 'P28A',
+  9: 'VTC6A',
+  10: 'P42A',
+  11: '40T3'
 };
 
 const getBatteryTypeName = (code) => {
@@ -442,6 +442,17 @@ let resetBatteryStats = async (type) => {
   }
 }
 
+let applyOverride = async (type, value) => {
+  try {
+    let formData = new FormData();
+    formData.append("type", type);
+    formData.append("value", value);
+    await callOwieApi("POST", "override", formData);
+  } catch (e) {
+    handleError(e);
+  }
+}
+
 
 // handling the alerter toaster
 let showAlerter = (alertType, alertText, showClose=true) => {
@@ -592,6 +603,8 @@ let handleMetadata = async () => {
 
      // add captured BMS battery type
      document.querySelector(".bms-battery-type-meta").innerHTML = `${getBatteryTypeName(meta.bms_battery_type_captured)}`;
+     // add BMS battery type override
+     document.querySelector(".bms-battery-type-override-meta").innerHTML = `${getBatteryTypeName(meta.bms_battery_type_override)}`;
   } catch (e) {
     handleError(e);
   }
@@ -733,6 +746,13 @@ let startup = async () => {
   const updateUpdateBtn = document.getElementById("fwUpdBtn");
   updateUpdateBtn.addEventListener('click', (e) => {
     firmwareInput.click();
+  })
+
+  // override section
+
+  // battery type override
+  document.getElementById("batteryTypeSelect").addEventListener('change', async (e) => {
+    await applyOverride('bmsBatteryType', e.target.value);
   })
 
   //  setting firmware update

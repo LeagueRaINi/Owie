@@ -96,6 +96,31 @@
                 </div>
             </div>
             <div class="divider"></div>
+            <div class="override header">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="content-icon">
+                    <path d="M2 12H4V17H20V12H22V17C22 18.11 21.11 19 20 19H4C2.9 19 2 18.11 2 17V12M12 2L6.46 7.46L7.88 8.88L11 5.75V15H13V5.75L16.13 8.88L17.55 7.45L12 2Z" />
+                </svg>
+                <span class="title">Overrides</span>
+            </div>
+            <div class="override content">
+                <div>
+                    <select id="batteryTypeSelect">
+                        <option value="0">Default</option>
+                        <option value="1">A123 LiFePO4</option>
+                        <option value="2">VTC6</option>
+                        <option value="3">HG2</option>
+                        <option value="4">30Q</option>
+                        <option value="5">VTC5A</option>
+                        <option value="6">VTC5D</option>
+                        <option value="7">30Q6</option>
+                        <option value="8">P28A</option>
+                        <option value="9">VTC6A</option>
+                        <option value="10">P42A</option>
+                        <option value="11">40T3</option>
+                    </select>
+                </div>
+            </div>
+            <div class="divider"></div>
             <div class="battery-status header">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="content-icon">
                     <path d="M16.67,4H15V2H9V4H7.33A1.33,1.33 0 0,0 6,5.33V20.67C6,21.4 6.6,22 7.33,22H16.67A1.33,1.33 0 0,0 18,20.67V5.33C18,4.6 17.4,4 16.67,4Z" />
@@ -138,6 +163,11 @@
             <div class="stat-container">
                 <div><span class="owie-label">BMS BATTERY TYPE</span></div>
                 <div class="stats-value"><span class="value-text bms-battery-type-meta"></span><span
+                        class="owie-label value-label"></span></div>
+            </div>
+            <div class="stat-container">
+                <div><span class="owie-label">BMS BATTERY TYPE OVERRIDE</span></div>
+                <div class="stats-value"><span class="value-text bms-battery-type-override-meta"></span><span
                         class="owie-label value-label"></span></div>
             </div>
         </div>
