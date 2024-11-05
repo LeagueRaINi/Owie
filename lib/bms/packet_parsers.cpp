@@ -89,6 +89,8 @@ void BmsRelay::temperatureParser(Packet& p) {
   }
   int8_t* const temperatures = (int8_t*)p.data();
   int16_t temperature_sum = 0;
+  // gen >= xr | 4 battery cell temp sensors and bms temp
+  // gen <  xr | ?
   for (int i = 0; i < 5; i++) {
     int8_t temp = temperatures[i];
     temperature_sum += temp;
