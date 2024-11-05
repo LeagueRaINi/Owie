@@ -111,6 +111,7 @@ void BmsRelay::ingestPacket(Packet& p) {
   cellVoltageParser(p);
   temperatureParser(p);
   batteryTypeParser(p);
+  batteryHealthAndCyclesParser(p);
   //  Recalculate CRC so that logging callbacks see the correct CRCs
   p.recalculateCrcIfValid();
   if (p.shouldForward()) {

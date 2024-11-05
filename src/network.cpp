@@ -130,6 +130,10 @@ DynamicJsonDocument generateMetadataJson() {
   root["bms_battery_type_captured"] = relay->getCapturedBMSBatteryType();
   root["bms_battery_type_override"] = Settings->bms_battery_type_override;
 
+  // add current read out BMS Battery life and Cycle count
+  root["bms_battery_life_captured"] = relay->getCapturedBMSBatteryLife();
+  root["bms_battery_cycles_captured"] = relay->getCapturedBMSBatteryCycles();
+
   // package stats in monitoring section
   root["package_stats"] = generatePackageStatsJson();
 

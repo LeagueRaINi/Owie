@@ -122,3 +122,13 @@ void BmsRelay::batteryTypeParser(Packet& p) {
     p.data()[0] = bms_battery_type_override_;
   }
 }
+
+void BmsRelay::batteryHealthAndCyclesParser(Packet& p) {
+  if (p.getType() != 13) {
+    return;
+  }
+
+  const uint8_t* const data = p.data();
+  bms_battery_cycles_ = data[1] | (data[0] << 8);
+  bms_battery_life_ = data[2];
+}

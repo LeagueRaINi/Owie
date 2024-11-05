@@ -442,17 +442,17 @@ let resetBatteryStats = async (type) => {
   }
 }
 
-let applyOverride = async (type, value) => {
+let setBatteryTypeOverride = async (value) => {
   try {
     let formData = new FormData();
-    formData.append("type", type);
+    formData.append("type", "bmsBatteryType");
     formData.append("value", value);
     await callOwieApi("POST", "override", formData);
+    showAlerter("success","Successfully set battery type!<br>Please restart your Board!");
   } catch (e) {
     handleError(e);
   }
 }
-
 
 // handling the alerter toaster
 let showAlerter = (alertType, alertText, showClose=true) => {
@@ -601,10 +601,18 @@ let handleMetadata = async () => {
      // add captured BMS serial number (information only)
      document.querySelector(".bms-serial-meta").innerHTML = `${meta.bms_serial_captured}`;
 
-     // add captured BMS battery type
+     // add captured BMS battery type and override
      document.querySelector(".bms-battery-type-meta").innerHTML = `${getBatteryTypeName(meta.bms_battery_type_captured)}`;
-     // add BMS battery type override
      document.querySelector(".bms-battery-type-override-meta").innerHTML = `${getBatteryTypeName(meta.bms_battery_type_override)}`;
+
+     // set the battery type override selection to the current override
+     document.getElementById("batteryTypeSelect").selectedIndex = meta.bms_battery_type_override;
+
+     // add captured BMS battery life
+     document.querySelector(".bms-battery-life-meta").innerHTML = `${meta.bms_battery_life_captured}`;
+
+     // add captured BMS battery cycles
+     document.querySelector(".bms-battery-cycles-meta").innerHTML = `${meta.bms_battery_cycles_captured}`;
   } catch (e) {
     handleError(e);
   }
@@ -752,7 +760,7 @@ let startup = async () => {
 
   // battery type override
   document.getElementById("batteryTypeSelect").addEventListener('change', async (e) => {
-    await applyOverride('bmsBatteryType', e.target.value);
+    await setBatteryTypeOverride(e.target.value);
   })
 
   //  setting firmware update

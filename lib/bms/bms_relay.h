@@ -82,6 +82,16 @@ class BmsRelay {
   void setBMSBatteryTypeOverride(uint8_t type) { bms_battery_type_override_ = type; }
 
   /**
+   * @brief Battery life reported by the BMS.
+   */
+  uint8_t getCapturedBMSBatteryLife() { return bms_battery_life_; }
+
+   /**
+   * @brief Battery cycles reported by the BMS.
+   */
+  uint16_t getCapturedBMSBatteryCycles() { return bms_battery_cycles_; }
+
+  /**
    * @brief Spoofed battery percentage sent to the controller.
    */
   int8_t getOverriddenSOC() { return overridden_soc_percent_; }
@@ -151,6 +161,9 @@ class BmsRelay {
   uint8_t bms_battery_type_ = 0;
   uint8_t bms_battery_type_override_ = 0;
 
+  uint16_t bms_battery_cycles_ = 0;
+  uint8_t bms_battery_life_ = 0;
+
   int8_t temperatures_celsius_[5] = {0};
   int8_t avg_temperature_celsius_ = 0;
   uint8_t last_status_byte_ = 0;
@@ -168,6 +181,7 @@ class BmsRelay {
   void cellVoltageParser(Packet& p);
   void temperatureParser(Packet& p);
   void batteryTypeParser(Packet& p);
+  void batteryHealthAndCyclesParser(Packet& p);
 };
 
 #endif  // BMS_RELAY_H
