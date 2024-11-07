@@ -73,7 +73,7 @@ DynamicJsonDocument generatePackageStatsJson() {
 }
 
 DynamicJsonDocument generateMetadataJson() {
-  DynamicJsonDocument metadata(2048);
+  DynamicJsonDocument metadata(1274);
   JsonObject root = metadata.to<JsonObject>();
 
   // owie version
@@ -89,12 +89,6 @@ DynamicJsonDocument generateMetadataJson() {
               ESP.getChipId() & 0xFFFF);
   }
   root["display_ap_name"] =String(apDisplayName);
-
-  // current uptime 
-  root["uptime"] = uptimeString();
-
-  // charging
-  root["charging"] = relay->isCharging();
 
   // shutdown count
   root["graceful_shutdown_count"] = String(Settings->graceful_shutdown_count);
