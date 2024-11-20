@@ -19,6 +19,7 @@ message SettingsMsg {
   bool locking_enabled = 10; // if the board locking functionality is enabled ('armed')
   BatteryStateMsg battery_state = 12;
   uint32 bms_battery_type_override = 13;
+  bool override_soc_percentage = 14;
 
   reserved 5,11;
 }

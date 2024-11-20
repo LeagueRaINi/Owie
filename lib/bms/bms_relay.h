@@ -95,6 +95,18 @@ class BmsRelay {
    * @brief Spoofed battery percentage sent to the controller.
    */
   int8_t getOverriddenSOC() { return overridden_soc_percent_; }
+
+  /**
+   * @brief If set to true, owie will spoof the BMS battery percentage
+   * using its own calculations.
+   */
+  void setOverrideSocPercent(bool value) { override_soc_percent_ = value; }
+
+  /**
+   * @brief If true owie is spoofing the BMS battery percentage.
+   */
+  bool getOverrideSocPercent() { return override_soc_percent_; }
+
   /**
    * @brief Cell voltages in millivolts.
    * @return pointer to a 15 element array.
@@ -153,6 +165,7 @@ class BmsRelay {
   uint32_t captured_serial_ = 0;
   int16_t current_milliamps_ = 0;
 
+  bool override_soc_percent_ = false;
   int8_t bms_soc_percent_ = -1;
   int8_t overridden_soc_percent_ = -1;
   uint16_t cell_millivolts_[15] = {0};

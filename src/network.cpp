@@ -128,6 +128,9 @@ DynamicJsonDocument generateMetadataJson() {
   root["bms_battery_life_captured"] = relay->getCapturedBMSBatteryLife();
   root["bms_battery_cycles_captured"] = relay->getCapturedBMSBatteryCycles();
 
+  // is owie currently overriding the batter percentage send to the controller?
+  root["override_soc_percent"] = relay->getOverrideSocPercent();
+
   // package stats in monitoring section
   root["package_stats"] = generatePackageStatsJson();
 
@@ -424,6 +427,25 @@ void setupWebServer(BmsRelay *bmsRelay) {
 
     if (strcmp(overrideType->value().c_str(), "bmsBatterySerial") == 0) {
       // TODO
+      return;
+    }
+
+    if (strcmp(overrideType->value().c_str(), "overrideSocPercentage") == 0) {
+      // sanity check
+      if (overrideValue == nullptr) {
+          request->send(
+              400, "text/html",
+              "Battery type MUST be between 0 and 11.");
+          return;
+        }
+
+      const auto override_soc_percent = overrideValue->value() == "true";
+      relay->setOverrideSocPercent(override_soc_percent);
+
+      Settings->override_soc_percentage = override_soc_percent;
+      saveSettings();
+
+      request->send(200, "text/html", "Soc percentage override set!");
       return;
     }
 

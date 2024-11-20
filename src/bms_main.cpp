@@ -81,6 +81,10 @@ void bms_setup() {
     relay->setBMSBatteryTypeOverride(Settings->bms_battery_type_override);
   }
 
+  if (Settings->override_soc_percentage) {
+    relay->setOverrideSocPercent(Settings->override_soc_percentage);
+  }
+
   // relay->setPowerOffCallback([]() {
   //   Settings->graceful_shutdown_count++;
   //   const FuelGaugeState &gaugeState = relay->getBatteryFuelGauge().getState();

@@ -454,6 +454,18 @@ let setBatteryTypeOverride = async (value) => {
   }
 }
 
+let setOverrideSocPercentage = async (value) => {
+  try {
+    let formData = new FormData();
+    formData.append("type", "overrideSocPercentage");
+    formData.append("value", value);
+    await callOwieApi("POST", "override", formData);
+    showAlerter("success","Successfully set override soc percentage!");
+  } catch (e) {
+    handleError(e);
+  }
+}
+
 // handling the alerter toaster
 let showAlerter = (alertType, alertText, showClose=true) => {
   const alerter = document.getElementById("toaster");
@@ -608,6 +620,9 @@ let handleMetadata = async () => {
      // set the battery type override selection to the current override
      document.getElementById("batteryTypeSelect").selectedIndex = meta.bms_battery_type_override;
 
+     // set the override soc percent checkbox value
+     document.getElementById("overrideSocPercentCb").checked = meta.override_soc_percent;
+
      // add captured BMS battery life
      document.querySelector(".bms-battery-life-meta").innerHTML = `${meta.bms_battery_life_captured}`;
 
@@ -761,6 +776,11 @@ let startup = async () => {
   // battery type override
   document.getElementById("batteryTypeSelect").addEventListener('change', async (e) => {
     await setBatteryTypeOverride(e.target.value);
+  })
+
+  // override soc percentage
+  document.getElementById("overrideSocPercentCb").addEventListener('change', async (e) => {
+    await setOverrideSocPercentage(e.target.checked);
   })
 
   //  setting firmware update
